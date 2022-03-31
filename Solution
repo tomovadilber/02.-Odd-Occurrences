@@ -1,0 +1,48 @@
+using System;
+using System.Linq;
+using System.Numerics;
+using System.Text;
+using System.Collections.Generic;
+using System.Collections;
+
+
+namespace AssociativeArrays
+{
+    class Program
+    {
+        static void Main(string[] args)
+        {
+            string[] numbers = Console.ReadLine().Split(' ', StringSplitOptions.RemoveEmptyEntries).ToArray();
+
+            for (int i = 0; i < numbers.Length; i++)
+                numbers[i] = numbers[i].ToLower();
+
+            Dictionary<string, int> counts = new Dictionary<string, int>();
+
+            foreach (var item in numbers)
+            {
+                if (counts.ContainsKey(item))
+                {
+                    counts[item]++;
+                }
+                else
+                {
+                    counts.Add(item, 1);
+                }
+            }
+
+            foreach (var item in counts)
+            {
+                if (item.Value % 2 == 0)
+                {
+                    counts.Remove(item.Key);
+                }
+            }
+
+            foreach (var item in counts)
+            {
+                Console.Write($"{item.Key} ");
+            }
+        }
+    }
+}
